@@ -1,0 +1,35 @@
+---
+title: "StepsAnalysis"
+author: "Asif Khan"
+date: "September 6, 2017"
+
+---
+
+## R Markdown
+
+The data is already nicely formatted so no need to process or change further. I will use the Data Frame StepsData for all further questions and process or transform as required per question.
+
+
+```{r LoadingData}
+StepsData <- read.csv("activity.csv")
+```
+
+What is the total number of steps taken per day?
+
+Total number of steps ignoring NA values from the dataset is:
+```{r StepsPerDay, echo=TRUE}
+aggregate(steps ~ date, StepsData, mean, na.rm=TRUE)
+```
+
+Histogram of total number of steps taken each day:
+
+```{r StepsHist}
+hist(aggregate(steps ~ date, StepsData, sum, na.rm=TRUE )$steps, main = "Total number of steps taken each day", xlab = "Number of Steps", ylab = "Frequency")
+```
+
+The mean of the total number of steps taken each day is ```{r meantotalsteps} 
+mean(aggregate(steps ~ date, StepsData, mean, na.rm=TRUE )$steps)```
+
+The median of the total number of steps taken each day is ```{r mediantotalsteps} median(aggregate(steps ~ date, StepsData, mean, na.rm=TRUE )$steps)```
+
+
