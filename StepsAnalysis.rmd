@@ -2,7 +2,6 @@
 title: "StepsAnalysis"
 author: "Asif Khan"
 date: "September 6, 2017"
-
 ---
 
 ## R Markdown
@@ -27,9 +26,20 @@ Histogram of total number of steps taken each day:
 hist(aggregate(steps ~ date, StepsData, sum, na.rm=TRUE )$steps, main = "Total number of steps taken each day", xlab = "Number of Steps", ylab = "Frequency")
 ```
 
-The mean of the total number of steps taken each day is ```{r meantotalsteps} 
-mean(aggregate(steps ~ date, StepsData, mean, na.rm=TRUE )$steps)```
+The mean of the total number of steps taken each day is 
+```{r meantotalsteps}
+mean(aggregate(steps ~ date, StepsData, mean, na.rm=TRUE )$steps)
+```
 
-The median of the total number of steps taken each day is ```{r mediantotalsteps} median(aggregate(steps ~ date, StepsData, mean, na.rm=TRUE )$steps)```
+The median of the total number of steps taken each day is 
+```{r mediantotalsteps} 
+median(aggregate(steps ~ date, StepsData, mean, na.rm=TRUE )$steps)
+```
 
-
+Average Daily Activity Pattern:
+```{r dailypattern}
+library(data.table)
+library(ggplot2)
+dt <- data.table(StepsData[!is.na(StepsData$steps),])
+a <- dt[, list(mean = mean(steps)), by = list(date, interval)] 
+qplot
